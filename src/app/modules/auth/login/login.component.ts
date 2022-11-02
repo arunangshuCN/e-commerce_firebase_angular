@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm:any=FormGroup;
+  isLoginMode=true;
 
   constructor(private fb:FormBuilder) { }
 
@@ -19,9 +20,13 @@ export class LoginComponent implements OnInit {
       password:['',Validators.required]
     })
   }
+  onSwitchMode(){
+    this.isLoginMode=!this.isLoginMode
+  }
 
-  onLogin(){
+  onSubmit(){
     console.log(this.loginForm.value);
+    this.loginForm.reset()
     
   }
 

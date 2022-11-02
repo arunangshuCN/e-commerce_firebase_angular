@@ -8,5 +8,7 @@ export const environment = {
     appId: "1:189793563561:web:aaab743342aa229d6d4ab8"
   
   },
-  production: true
+  production: true,
+  apiKey:'',
+  apiUrl:'https://identitytoolkit.googleapis.com/v1/accounts'
 };

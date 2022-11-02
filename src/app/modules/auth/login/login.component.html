@@ -9,7 +9,7 @@
           <h3>Welcome <br>To<br> E-Commerce</h3>
         </div>
         <p style="color: lightslategray; text-align: center;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your login
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your {{isLoginMode?'login':'signup'}}
           details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <mat-card>
           <mat-card-content>
@@ -21,21 +21,21 @@
             <!-- <div class="alert alert-danger my-4" >
                              
                             </div> -->
-            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <mat-form-field>
                 <input matInput placeholder="Email" name="username" formControlName="email" required>
 
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="password" placeholder="Password" name="password" formControlName="password" required>
+                <input matInput type="password" placeholder="Password" name="password" minlength="4" formControlName="password" required>
               </mat-form-field>
-              <button mat-raised-button color="primary" type="submit">Login</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">{{isLoginMode? 'Login' : 'SignUp'}}</button>
             </form>
           </mat-card-content>
         </mat-card>
       </div>
       <div class="card-footer text-right">
-        <small><a [routerLink]="['../signup']">Not Registered? Signup</a></small>
+        <small><a (click)="onSwitchMode()" style="cursor: pointer;">{{isLoginMode?'Not Registered? Signup':'Already have an account? Login'}}</a></small>
 
       </div>
 

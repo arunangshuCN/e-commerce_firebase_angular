@@ -15,4 +15,8 @@ export class AuthService {
   logout(){
     return from(this.auth.signOut());
   }
+
+  signup(){
+    
+  }
 }
