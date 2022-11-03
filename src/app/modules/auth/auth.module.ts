@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/materials/material/material.module';
+import { NgxLoadingComponent } from 'src/app/shared/ngx-loading/ngx-loading.component';
+import { NgxLoadingModule } from 'ngx-loading';
 const routes: Routes = [
   {
     path: 'login',
@@ -19,12 +21,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NgxLoadingComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
+    MaterialModule,
+    NgxLoadingModule.forRoot({}),
   ]
 })
 export class AuthModule { }

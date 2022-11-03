@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment.prod';
+import { AuthService } from './shared/auth.service';
+import { NgxLoadingModule } from 'ngx-loading';
+import { NgxLoadingComponent } from './shared/ngx-loading/ngx-loading.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,9 @@ import { environment } from 'src/environments/environment.prod';
     MaterialModule,
     RouterModule.forRoot(routes,{useHash:true}),
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
+    NgxLoadingModule.forRoot({}),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

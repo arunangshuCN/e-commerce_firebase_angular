@@ -9,6 +9,6 @@ export const environment = {
   
   },
   production: true,
-  apiKey:'',
+  apiKey:'AIzaSyAKpRVhM_Emzbjn9t7rvuLcfN__cgMBiEs',
   apiUrl:'https://identitytoolkit.googleapis.com/v1/accounts'
 };
