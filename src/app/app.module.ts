@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment.prod';
 import { AuthService } from './shared/auth.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { NgxLoadingComponent } from './shared/ngx-loading/ngx-loading.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [

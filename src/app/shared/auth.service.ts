@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Subject } from 'rxjs';
+import { BehaviorSubject, from, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { catchError, tap} from 'rxjs/operators'
 import { throwError} from 'rxjs'
@@ -19,8 +19,8 @@ export interface AuthResponseData{
 })
 export class AuthService {
 
-  user=new Subject<User>()
-
+  user:any=new BehaviorSubject<any>(null)
+  token:string=''
   constructor(private http:HttpClient) { }
 
   signup(email:string,password:string){
@@ -45,7 +45,13 @@ export class AuthService {
       email:email,
       password:password,
       returnSecureToken:true
-    }).pipe(catchError(this.handleError))
+    }).pipe(catchError(this.handleError),tap(resData=>{
+      this.handleAuthentication(resData.email,resData.localId,resData.idToken,+resData.expiresIn)
+    }))
+  }
+
+  logout(){
+    this.user.next(null)
   }
 
   //Handle the authentication

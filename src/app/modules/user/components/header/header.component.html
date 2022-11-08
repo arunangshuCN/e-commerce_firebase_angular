@@ -6,17 +6,17 @@
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="navbar-nav">
-            <li class="nav-item" routerLinkActive="active">
+        <ul class="navbar-nav" >
+            <li class="nav-item" *ngIf="isAuthenticated" routerLinkActive="active">
                 
-                <a class="nav-link" >
+                <a class="nav-link" [routerLink]="['./home']" style="cursor: pointer;" >
                    Home
                     
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" >Products</a>
+            <li class="nav-item"  *ngIf="isAuthenticated" routerLinkActive="active">
+                <a class="nav-link" style="cursor: pointer;" [routerLink]="['./product']" >Products</a>
             </li>
             <!-- <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" >Drinks & Beverages</a>
@@ -30,7 +30,7 @@
 
             </li>
         </ul>
-        <button mat-button color="primary" class="text-white">
+        <button mat-button color="primary" class="text-white" (click)="onLogout()" *ngIf="isAuthenticated">
             <mat-icon>logout</mat-icon>
             Logout
 
