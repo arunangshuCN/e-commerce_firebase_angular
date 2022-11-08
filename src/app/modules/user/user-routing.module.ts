@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductsComponent } from './components/products/products.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
@@ -8,7 +10,13 @@ const routes: Routes = [
   {path:'',component:UserDashboardComponent,
     children:[
       {path:'home',component:HomeComponent},
-      {path:'product',component:ProductsComponent},
+      {path:'',component:ProductsComponent,
+        children:[
+        {path:'product/:id',component:ProductDetailsComponent}
+        ]
+      },
+      {path:'cart',component:CartComponent},
+
       {path:'',redirectTo:'user/home',pathMatch:'full'}
     ]
   }

@@ -8,6 +8,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { MaterialModule } from 'src/app/materials/material/material.module';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { CartComponent } from './components/cart/cart.component';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { MaterialModule } from 'src/app/materials/material/material.module';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductDetailsComponent,
+    CartComponent,
+   
   ],
   imports: [
     CommonModule,
