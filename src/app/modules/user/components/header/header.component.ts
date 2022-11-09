@@ -9,26 +9,32 @@ import { AuthService } from 'src/app/shared/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit,OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  private userSub!:Subscription;
-  isAuthenticated=false;
-  constructor(private authService:AuthService,private router:Router) { }
+  private userSub!: Subscription;
+  isAuthenticated = false;
+  private quantity!: Subscription;
+  cart_quantity: number = 0;
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userSub=this.authService.user.subscribe((user:any)=>{
-      this.isAuthenticated=!!user
-      console.log(user);
-      
+    if (localStorage.getItem('userData')) {
+      this.isAuthenticated = true
+    }
+
+    this.quantity = this.authService.cartQuantity.subscribe((quant: number) => {
+      this.cart_quantity = quant
     })
   }
 
   ngOnDestroy(): void {
-    this.userSub.unsubscribe()
+    // this.userSub.unsubscribe();
+    this.quantity.unsubscribe();
   }
 
-  onLogout(){
-    this.authService.logout();
+  onLogout() {
+    // this.authService.logout();
+    localStorage.removeItem('userData')
     this.router.navigate(['/auth/login'])
   }
 

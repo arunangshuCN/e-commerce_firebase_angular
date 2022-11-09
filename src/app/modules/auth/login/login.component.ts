@@ -16,7 +16,12 @@ export class LoginComponent implements OnInit {
   isLoading=false;
   error:string='';
 
-  constructor(private fb:FormBuilder,private authService:AuthService,private router:Router) { }
+  constructor(private fb:FormBuilder,private authService:AuthService,private router:Router) {
+    if(localStorage.getItem('userData')){
+      this.router.navigate(['/user/home'])
+    }
+    
+   }
 
   ngOnInit(): void {
     this.loginForm=this.fb.group({

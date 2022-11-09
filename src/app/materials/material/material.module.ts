@@ -17,6 +17,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatBadgeModule} from '@angular/material/badge';
 const materialModules=[
   MatToolbarModule,
   MatInputModule,
@@ -37,7 +38,8 @@ const materialModules=[
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatBadgeModule
 ]
 
 @NgModule({

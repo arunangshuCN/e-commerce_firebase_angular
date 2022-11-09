@@ -10,5 +10,6 @@ export const environment = {
   },
   production: true,
   apiKey:'AIzaSyAKpRVhM_Emzbjn9t7rvuLcfN__cgMBiEs',
-  apiUrl:'https://identitytoolkit.googleapis.com/v1/accounts'
+  apiUrl:'https://identitytoolkit.googleapis.com/v1/accounts',
+  productUrl:'https://angular-e-commerce-firebase-default-rtdb.firebaseio.com/'
 };

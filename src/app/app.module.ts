@@ -14,6 +14,8 @@ import { AuthService } from './shared/auth.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { NgxLoadingComponent } from './shared/ngx-loading/ngx-loading.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorInterceptor } from './shared/auth-interceptor.interceptor';
+import { ProductService } from './shared/product.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserAnimationsModule,
     NgxLoadingModule.forRoot({}),
   ],
-  providers: [AuthService],
+  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorInterceptor,multi:true},ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

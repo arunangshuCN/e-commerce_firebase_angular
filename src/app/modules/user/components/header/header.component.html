@@ -16,24 +16,18 @@
                 </a>
             </li>
             <li class="nav-item"  *ngIf="isAuthenticated" routerLinkActive="active">
-                <a class="nav-link" style="cursor: pointer;" [routerLink]="['./product']" >Products</a>
+                <a class="nav-link" style="cursor: pointer;" [routerLink]="['./product-add']" >Products</a>
             </li>
-            <!-- <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" >Drinks & Beverages</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" >Contact</a>
-            </li> -->
             <li class=" nav-item ">
                <!-- <button  mat-raised-button color="primary" > Logout</button> -->
-               
-
             </li>
         </ul>
+       
+        <mat-icon [matBadge]="cart_quantity" matBadgeColor="warn" style="cursor: pointer;" [routerLink]="['./cart']">add_shopping_cart</mat-icon>
+       
         <button mat-button color="primary" class="text-white" (click)="onLogout()" *ngIf="isAuthenticated">
             <mat-icon>logout</mat-icon>
             Logout
-
         </button>
         </div>
         <!-- <div class="collapse navbar-collapse justify-content-between custom-flex-prop" id="navbarResponsive">

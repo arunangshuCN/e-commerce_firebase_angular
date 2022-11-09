@@ -20,7 +20,9 @@ export interface AuthResponseData{
 export class AuthService {
 
   user:any=new BehaviorSubject<any>(null)
-  token:string=''
+  token:string='';
+  cartQuantity:any= new BehaviorSubject<number>(0);
+
   constructor(private http:HttpClient) { }
 
   signup(email:string,password:string){
@@ -50,6 +52,17 @@ export class AuthService {
     }))
   }
 
+  autoLogin(){
+    const userData:any=localStorage.getItem('userData');
+    if(!userData){
+      return;
+    }
+    const loadedUser=new User(userData.email,userData.id,userData.token,new Date(userData.tokenExpirationData));
+    if(loadedUser.getToken){
+      this.user.next(loadedUser)
+    }
+  }
+
   logout(){
     this.user.next(null)
   }
@@ -66,6 +79,7 @@ export class AuthService {
     expirationDate
     )
     this.user.next(user)
+    localStorage.setItem('userData',JSON.stringify(user));
   }
 
 
