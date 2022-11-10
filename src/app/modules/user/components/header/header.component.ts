@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/shared/auth.service';
+import { CartService } from 'src/app/shared/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -15,21 +16,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private quantity!: Subscription;
   cart_quantity: number = 0;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,private cartService:CartService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('userData')) {
       this.isAuthenticated = true
     }
 
-    this.quantity = this.authService.cartQuantity.subscribe((quant: number) => {
-      this.cart_quantity = quant
+    this.cartService.getProductData().subscribe((res:any)=>{
+      console.log(res);
+      
+      this.cart_quantity=res.length;
     })
+    // this.quantity = this.authService.cartQuantity.subscribe((quant: number) => {
+    //   this.cart_quantity = quant
+    // })
   }
 
   ngOnDestroy(): void {
     // this.userSub.unsubscribe();
-    this.quantity.unsubscribe();
+    // this.quantity.unsubscribe();
   }
 
   onLogout() {

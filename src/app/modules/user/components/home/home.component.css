@@ -1,0 +1,4 @@
+.cust-min-vh-60 {
+    min-height: 60vh;
+    height: max-content;
+}

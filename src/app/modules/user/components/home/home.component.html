@@ -1,23 +1,32 @@
-<div class="container pt-5 pb-5">
+<div class="container pt-5 pb-5 cust-min-vh-60">
     <div class="col-12">
         <button class="btn btn-primary" [routerLink]="['../product-add']">
             Add Product
         </button>
-        <div class="d-flex flex-wrap justify-content-between">
-            
-            <div class="card shadow mt-2" *ngFor="let prodItem of prod;let i=index">
-                
-                <div class="card-body">
-                    <h5 class="card-title">{{prodItem.product_name}}</h5>
-                    <span class="pull-right">
-                        <img [src]="prodItem.imagePath" alt="{{prodItem.product_name}}" class="img-responsive" style="max-height: 50px;">
-                    </span>
-                    <p class="card-text">{{prodItem.description}}</p>
-                    <span class="card-text">Price: {{prodItem.price}}</span><br>
-                    <a class="btn btn-primary" (click)="addToCart()">Add To Cart</a>
-                   
-                </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <p *ngIf="prod.length<1">No product available!</p>
             </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between" *ngIf="prod.length>=1">
+
+            
+            
+
+                <div class="card shadow mt-2" *ngFor="let prodItem of prod;let i=index">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{prodItem.product_name}}</h5>
+                        <span class="pull-right">
+                            <img [src]="prodItem.imagePath" alt="{{prodItem.product_name}}" class="img-responsive" style="max-height: 50px;">
+                        </span>
+                        <p class="card-text">{{prodItem.description}}</p>
+                        <span class="card-text">Price: {{prodItem.price}}</span><br>
+                        <a class="btn btn-primary" (click)="addToCart(prodItem)">Add To Cart</a>
+                        <a class="btn btn-primary" (click)="onDelete(prodItem.id)">Delete</a>
+                    </div>
+                </div>
+            
             <!-- <div class="card shadow mt-2">
                 <div class="card-body">
                     <h5 class="card-title">User Component</h5>

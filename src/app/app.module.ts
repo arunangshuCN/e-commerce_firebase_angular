@@ -16,6 +16,7 @@ import { NgxLoadingComponent } from './shared/ngx-loading/ngx-loading.component'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorInterceptor } from './shared/auth-interceptor.interceptor';
 import { ProductService } from './shared/product.service';
+import { CartService } from './shared/cart.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { ProductService } from './shared/product.service';
     BrowserAnimationsModule,
     NgxLoadingModule.forRoot({}),
   ],
-  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorInterceptor,multi:true},ProductService],
+  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorInterceptor,multi:true},ProductService,CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

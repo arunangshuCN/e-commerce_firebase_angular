@@ -44,17 +44,20 @@ export class ProductService {
   }
 
   addProduct(data:{product_name:string,description:string,price:number,size:string,imagePath:string}){
-    return this.http.post(environment.productUrl + 'product.json',data).pipe(
+    return this.http.post<{product_name:string}>(environment.productUrl + 'product.json',data).pipe(
       retry(1)
     )
   }
 
   fetchProduct(){
-    return this.http.get(environment.productUrl + 'product.json').pipe(
+    //Added generic type
+    return this.http.get<{[key:string]:Product}>(environment.productUrl + 'product.json').pipe(
       retry(1)
-    ).subscribe(res=>{
-      console.log(res);
-      
-    })
+    )
+  }
+  removeProduct(id:any){
+    return this.http.post<{[key:string]:Product}>(environment.productUrl + 'product.json',id).pipe(
+      retry(1)
+    )
   }
 }
