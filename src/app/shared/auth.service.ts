@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   autoLogin(){
-    const userData:any=localStorage.getItem('userData');
+    const userData:any=localStorage.getItem('userToken');
     if(!userData){
       return;
     }
@@ -80,6 +80,7 @@ export class AuthService {
     )
     this.user.next(user)
     localStorage.setItem('userData',JSON.stringify(user));
+    localStorage.setItem('userToken',JSON.stringify(user.token))
   }
 
 

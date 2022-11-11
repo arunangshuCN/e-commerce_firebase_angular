@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   error:string='';
 
   constructor(private fb:FormBuilder,private authService:AuthService,private router:Router) {
-    if(localStorage.getItem('userData')){
+    if(localStorage.getItem('userToken')){
       this.router.navigate(['/user/home'])
     }
     

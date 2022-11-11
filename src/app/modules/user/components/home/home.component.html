@@ -22,7 +22,7 @@
                         </span>
                         <p class="card-text">{{prodItem.description}}</p>
                         <span class="card-text">Price: {{prodItem.price}}</span><br>
-                        <a class="btn btn-primary" (click)="addToCart(prodItem)">Add To Cart</a>
+                        <a class="btn btn-primary" (click)="addToCart(prodItem,prodItem.id)">Add To Cart</a>
                         <a class="btn btn-primary" (click)="onDelete(prodItem.id)">Delete</a>
                     </div>
                 </div>

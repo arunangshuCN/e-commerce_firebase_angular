@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { isDelegatedFactoryMetadata } from '@angular/compiler/src/render3/r3_factory';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 
@@ -10,9 +11,9 @@ import { environment } from 'src/environments/environment.prod';
 export class CartService {
 
   cartDataList:any=[];
-  productList:any=new BehaviorSubject<any>([]);
+  productList:any=new BehaviorSubject<any>(0);
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {}
 
   getProductData(){
     return this.productList.asObservable();
@@ -24,16 +25,31 @@ export class CartService {
   }
 
   addToCart(product:any){
-    this.cartDataList.push(product);
-    // this.http.post(environment.productUrl + 'cart.json',product).subscribe(prod=>{
-    //   this.cartDataList.push(prod)
-    //   console.log(this.cartDataList);
+    // this.cartDataList.push(product);
+    this.http.post(environment.productUrl + 'cart.json',product).subscribe(prod=>{
+      // this.cartDataList.push(prod)
+      console.log(prod);
       
-    // })
-    this.productList.next(this.cartDataList);
-    this.totalAmount();
-    console.log(this.cartDataList);
+      let productLength=0
+      this.getProductData().subscribe((res:any)=>{
+        console.log(res);
+         productLength=res
+      });
+      console.log(this.cartDataList.length);
+      
+      this.productList.next(Number(productLength)+1);
+      this.totalAmount();
+      console.log(this.cartDataList);
+    })
+   
     
+    
+  }
+
+  getCartProductData(){
+    return this.http.get(environment.productUrl + 'cart.json').pipe(
+      retry(1)
+    )
   }
 
   totalAmount():number{
@@ -44,16 +60,32 @@ export class CartService {
     return grandTotal;
   }
 
-  removeCartData(product:any){
-    this.cartDataList.map((amnt:any,index:any)=>{
-      if(product.id === amnt.id){
-        this.cartDataList.splice(index,1)
-      }
-    })
-    this.productList.next(this.cartDataList)
+  removeCartData(product_index:any){
+    console.log(product_index);
+    // console.log(this.cartDataList);
+    
+    // // this.cartDataList.map((amnt:any,index:any)=>{
+    // //   console.log(amnt,index);
+      
+    //   // if(product.id === amnt.id){
+    //     this.cartDataList.splice(product_index,1)
+    //   // }
+    // // })
+    // console.log(this.cartDataList);
+    
+    this.productList.next(product_index)
   }
+
+
   removeAllCartData(){
     this.cartDataList=[];
     this.productList.next(this.cartDataList)
+  }
+
+  deleteCartData(id:any){
+    return this.http.delete(environment.productUrl + 'cart/' +id+ '.json',{
+      params: new HttpParams().set('name', id)}).pipe(
+      retry(1)
+    )
   }
 }

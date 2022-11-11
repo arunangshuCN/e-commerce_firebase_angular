@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { retry } from 'rxjs/operators';
@@ -56,7 +56,9 @@ export class ProductService {
     )
   }
   removeProduct(id:any){
-    return this.http.post<{[key:string]:Product}>(environment.productUrl + 'product.json',id).pipe(
+    return this.http.delete<{[key:string]:Product}>(environment.productUrl + 'product/'+id+'.json',{
+      params: new HttpParams().set('name', id)
+  }).pipe(
       retry(1)
     )
   }

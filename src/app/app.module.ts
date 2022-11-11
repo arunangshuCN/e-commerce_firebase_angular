@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorInterceptor } from './shared/auth-interceptor.interceptor';
 import { ProductService } from './shared/product.service';
 import { CartService } from './shared/cart.service';
+import { AuthGuardGuard } from './shared';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { CartService } from './shared/cart.service';
     BrowserAnimationsModule,
     NgxLoadingModule.forRoot({}),
   ],
-  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorInterceptor,multi:true},ProductService,CartService],
+  providers: [AuthService,AuthGuardGuard,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorInterceptor,multi:true},ProductService,CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

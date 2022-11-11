@@ -16,18 +16,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private quantity!: Subscription;
   cart_quantity: number = 0;
-  constructor(private authService: AuthService, private router: Router,private cartService:CartService) { }
+  constructor(private authService: AuthService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('userData')) {
       this.isAuthenticated = true
     }
-
-    this.cartService.getProductData().subscribe((res:any)=>{
+    this.cartService.getProductData().subscribe((response: any) => {
+      console.log(response);
+      
+      this.cart_quantity = response;
+    })
+    this.cartService.getCartProductData().subscribe((res: any) => {
       console.log(res);
       
-      this.cart_quantity=res.length;
+      if(res!=null){
+        this.cartService.productList.next(Object.keys(res).length? Object.keys(res).length: 0);
+        this.cartService.getProductData().subscribe((response: any) => {
+          this.cart_quantity = response;
+        })
+      }
+      
     })
+
     // this.quantity = this.authService.cartQuantity.subscribe((quant: number) => {
     //   this.cart_quantity = quant
     // })
@@ -41,6 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     // this.authService.logout();
     localStorage.removeItem('userData')
+    localStorage.removeItem('userToken')
     this.router.navigate(['/auth/login'])
   }
 
