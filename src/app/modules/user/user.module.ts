@@ -10,6 +10,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { MaterialModule } from 'src/app/materials/material/material.module';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { CartComponent } from './components/cart/cart.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CartComponent } from './components/cart/cart.component';
   imports: [
     CommonModule,
     UserRoutingModule,
-    MaterialModule
+    MaterialModule,
+    NgxLoadingModule.forRoot({}),
   ]
 })
 export class UserModule { }

@@ -24,6 +24,7 @@ export class CartService {
     this.productList.next(product)
   }
 
+  //Add product into cart
   addToCart(product:any){
     // this.cartDataList.push(product);
     this.http.post(environment.productUrl + 'cart.json',product).subscribe(prod=>{
@@ -35,30 +36,28 @@ export class CartService {
         console.log(res);
          productLength=res
       });
-      console.log(this.cartDataList.length);
-      
       this.productList.next(Number(productLength)+1);
-      this.totalAmount();
-      console.log(this.cartDataList);
+      // this.totalAmount();
     })
-   
-    
     
   }
 
+  //Get cart product
   getCartProductData(){
     return this.http.get(environment.productUrl + 'cart.json').pipe(
       retry(1)
     )
   }
 
-  totalAmount():number{
-    let grandTotal=0;
-    this.cartDataList.map((amnt:any)=>{
-      grandTotal+=amnt.total;
-    })
-    return grandTotal;
-  }
+  // totalAmount():number{
+  //   let grandTotal=0;
+  //   this.cartDataList.map((amnt:any)=>{
+  //     console.log(amnt);
+      
+  //     grandTotal+=amnt.total;
+  //   })
+  //   return grandTotal;
+  // }
 
   removeCartData(product_index:any){
     console.log(product_index);
@@ -82,6 +81,16 @@ export class CartService {
     this.productList.next(this.cartDataList)
   }
 
+  //update cart value
+  updateCartValue(id:any,data:any){
+    return this.http.patch(environment.productUrl + 'cart/' + id + '.json',data,{
+      params: new HttpParams().set('name', id) 
+    }).pipe(
+      retry(1)
+    )
+  }
+
+  //product delete from cart
   deleteCartData(id:any){
     return this.http.delete(environment.productUrl + 'cart/' +id+ '.json',{
       params: new HttpParams().set('name', id)}).pipe(

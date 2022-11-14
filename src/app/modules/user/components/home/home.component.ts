@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -12,12 +13,19 @@ import { ProductService } from 'src/app/shared/product.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService:AuthService,private prodService:ProductService,private cartService:CartService) { }
+  constructor(private authService:AuthService,
+    private prodService:ProductService,
+    private cartService:CartService,
+    private router:Router
+    ) { }
 
   counter:number=0;
   prod:Product[]=[];
   error:any=null;
+  isLoading=false;
+
   ngOnInit(){
+    this.isLoading=true;
     this.prodService.fetchProduct().pipe(map((resData:any)=>{
       const productArray:Product[]=[];
       for(const key in resData){
@@ -32,6 +40,7 @@ export class HomeComponent implements OnInit {
       this.prod.forEach((res:any)=>{
         Object.assign(res,{quantity:1,total:res.price})
       })
+      this.isLoading=false;
       
     },(error:Error)=>{
       this.error=error.message
@@ -63,6 +72,11 @@ export class HomeComponent implements OnInit {
       this.prod.splice(index,1)
     })
 
+  }
+
+  productDetails(id:any){
+    console.log(id);
+    
   }
 
 }

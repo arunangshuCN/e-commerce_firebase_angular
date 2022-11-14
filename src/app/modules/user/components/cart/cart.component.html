@@ -25,13 +25,18 @@
                             <td>{{prod.description}}</td>
                             <td>{{prod.price}}</td>
                             <td>{{prod.size}}</td>
-                            <td>{{prod.quantity}}</td>
+                            <td style="display: flex; align-items:center;">
+                                <mat-icon style="cursor: pointer;" (click)="decrementQty(i)">remove_circle</mat-icon>
+                                <span>{{prod.quantity}}</span>
+                                <mat-icon style="cursor: pointer;" (click)="incrementQty(i)">add_circle</mat-icon>
+                                
+                            </td>
                             <td>{{prod.total}}</td>
                             <td><button (click)="removeProduct(i)" class="btn btn-danger">Delete</button></td>
                         </tr>
                         <tr>
                             <td colspan="4"></td>
-                            <td><strong>Total Rs: {{allProducts}}</strong></td>
+                            <td><strong>Total Rs: {{totalAmount}}</strong></td>
                         </tr>
                     </tbody>
                 </div>
@@ -54,3 +59,6 @@
     </div>
 
 </ng-container>
+
+<ngx-loading [show]="isLoading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
