@@ -16,10 +16,11 @@
                 <div class="card shadow mt-2" *ngFor="let prodItem of prod;let i=index">
                     
                     <div class="card-body" style="cursor: pointer;" (click)="productDetails(prodItem.id)">
-                        <h5 class="card-title">{{prodItem.product_name}}</h5>
-                        <span class="pull-right">
-                            <img [src]="prodItem.imagePath" alt="{{prodItem.product_name}}" class="img-responsive" style="max-height: 50px;">
+                        <span class="pull-center">
+                            <img [src]="prodItem.imagePath" alt="{{prodItem.product_name}}" class="img-responsive" style="max-height: 172px; width: 100%;">
                         </span>
+                        <h5 class="card-title">{{prodItem.product_name}}</h5>
+                        
                         <p class="card-text">{{prodItem.description}}</p>
                         <span class="card-text">Price: {{prodItem.price}}</span><br>
                         <a class="btn btn-primary" (click)="addToCart(prodItem,prodItem.id)">Add To Cart</a>

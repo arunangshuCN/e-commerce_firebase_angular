@@ -11,7 +11,8 @@ export interface AuthResponseData{
   refreshToken:	string;
   expiresIn:	string;
   localId:	string;
-  registered?:	boolean
+  registered?:	boolean;
+  usertype?:string;
 }
 
 @Injectable({
@@ -30,7 +31,7 @@ export class AuthService {
     {
       email:email,
       password:password,
-      returnSecureToken:true
+      returnSecureToken:true,
     })
     //tap is a operator which is used without using the changes of response,its just run some code from observable
     .pipe(catchError(this.handleError),tap(resData=>{
@@ -46,7 +47,7 @@ export class AuthService {
     {
       email:email,
       password:password,
-      returnSecureToken:true
+      returnSecureToken:true,
     }).pipe(catchError(this.handleError),tap(resData=>{
       this.handleAuthentication(resData.email,resData.localId,resData.idToken,+resData.expiresIn)
     }))

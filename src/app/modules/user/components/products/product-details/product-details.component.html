@@ -1,20 +1,18 @@
 <div class="container pt-5 pb-5 cust-min-vh-60">
     <div class="col-12">
-        <div class="row">
-            <div class="col-xs-12 col-md-6 col-md-offset-3">
-            </div>
-        </div>
+        
         <div class="d-flex flex-wrap justify-content-between">
                 <div class="card shadow mt-2">
                     
                     <div class="card-body" >
-                        <h5 class="card-title">{{productDetails?.product_name}}</h5>
-                        <span class="pull-right">
-                            <img [src]="productDetails?.imagePath" alt="" class="img-responsive" style="max-height: 50px;">
-                        </span>
-                        <p class="card-text">{{productDetails?.description}}</p>
-                        <span class="card-text">{{productDetails?.price}}</span><br>
-                        <span class="card-text">{{productDetails?.size}}</span><br>
+                        <span class="pull-center">
+                            <img [src]="productDetails?.imagePath" alt="" class="img-responsive" style="max-height: 172px;">
+                        </span><br>
+                        <h5 class="card-title">Product: {{productDetails?.product_name}}</h5>
+                       
+                        <p class="card-text">Description: {{productDetails?.description}}</p>
+                        <span class="card-text">Rs.: {{productDetails?.price}}</span><br>
+                        <span class="card-text">Size: {{productDetails?.size}}</span><br>
                     </div>
                 </div>
         </div>

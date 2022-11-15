@@ -3,7 +3,7 @@ export class User{
         public email:string,
         public id:string,
         public token:string,
-        public tokenExpirationdate:Date
+        public tokenExpirationdate:Date,
     ){}
 
     get getToken(){

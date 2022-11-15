@@ -34,6 +34,13 @@
               <mat-form-field>
                 <input matInput type="password" placeholder="Password" name="password" minlength="4" formControlName="password" required>
               </mat-form-field>
+              <!-- <mat-form-field appearance="fill">
+                <mat-label>Select User Type</mat-label>
+                <mat-select disableRipple formControlName="usertype">
+                  <mat-option value="user">User</mat-option>
+                  <mat-option value="admin">Admin</mat-option>
+                </mat-select>
+              </mat-form-field> -->
               <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">{{isLoginMode? 'Login' : 'SignUp'}}</button>
             </form>
           </mat-card-content>

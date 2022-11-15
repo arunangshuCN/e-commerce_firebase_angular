@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   isLoginMode=true;
   isLoading=false;
   error:string='';
+  isUserOrAdmin=false;
 
   constructor(private fb:FormBuilder,private authService:AuthService,private router:Router) {
     if(localStorage.getItem('userToken')){
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm=this.fb.group({
       email:['',Validators.required],
-      password:['',Validators.required]
+      password:['',Validators.required],
+      // usertype:[]
     })
   }
   onSwitchMode(){
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
      authObs=this.authService.login(this.loginForm.value.email,this.loginForm.value.password)
     }else{
 
-      authObs=this.authService.signup(this.loginForm.value.email,this.loginForm.value.password)
+      authObs=this.authService.signup(this.loginForm.value.email,this.loginForm.value.password,)
     }
 
     authObs.subscribe(resData=>{
