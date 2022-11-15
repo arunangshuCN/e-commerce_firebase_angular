@@ -5,7 +5,6 @@ import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { ProductService } from 'src/app/shared/product.service';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,7 +15,8 @@ export class HomeComponent implements OnInit {
   constructor(private authService:AuthService,
     private prodService:ProductService,
     private cartService:CartService,
-    private router:Router
+    private router:Router,
+    
     ) { }
 
   counter:number=0;
@@ -76,6 +76,7 @@ export class HomeComponent implements OnInit {
 
   productDetails(id:any){
     console.log(id);
+    this.router.navigate(['user/product/'+id])
     
   }
 

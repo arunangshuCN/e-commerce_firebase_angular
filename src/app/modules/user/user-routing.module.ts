@@ -10,14 +10,10 @@ const routes: Routes = [
   {path:'',component:UserDashboardComponent,
     children:[
       {path:'home',component:HomeComponent},
-      {path:'',component:ProductsComponent,
-        children:[
-        {path:'product-add',component:ProductsComponent},
-        {path:'product/:id',component:ProductDetailsComponent}
-        ]
-      },
+      {path:'',component:ProductsComponent},
+      {path:'product-add',component:ProductsComponent},
+      {path:'product/:id',component:ProductDetailsComponent},
       {path:'cart',component:CartComponent},
-
       {path:'',redirectTo:'user/home',pathMatch:'full'}
     ]
   }

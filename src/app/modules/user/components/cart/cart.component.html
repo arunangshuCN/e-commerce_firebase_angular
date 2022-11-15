@@ -21,7 +21,7 @@
                         <tr *ngFor="let prod of products;let i=index">
                             <td>{{i+1}}</td>
                             <td>{{prod.product_name}}</td>
-                            <td>{{prod.imagePath}}</td>
+                            <td><img [src]="prod.imagePath" style="width: 20px;"></td>
                             <td>{{prod.description}}</td>
                             <td>{{prod.price}}</td>
                             <td>{{prod.size}}</td>

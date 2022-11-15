@@ -97,4 +97,12 @@ export class CartService {
       retry(1)
     )
   }
+
+  //getting product by id
+  getProductDetailsById(id:any){
+    return this.http.get(environment.productUrl + 'product/' + id + '.json').pipe(
+      retry(1)
+    )
+
+  }
 }

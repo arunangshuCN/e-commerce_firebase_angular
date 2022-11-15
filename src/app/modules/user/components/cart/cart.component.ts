@@ -24,6 +24,8 @@ export class CartComponent implements OnInit {
     //   this.products=res;
     //   this.allProducts=this.cartService.totalAmount()
     // })
+
+    //Getting product details.
     this.isLoading=true;
     this.cartService.getCartProductData().subscribe((res: any) => {
       if (res) {
